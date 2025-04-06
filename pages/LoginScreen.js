@@ -65,7 +65,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1B3075',
   },
   phoneContainer: {
     flex: 1,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1B3075',
     paddingBottom: -20,
   },
   phoneImage: {
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
   },
   activeDot: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1B3075',
     width: 7,
     height: 7,
     borderRadius: 3.5,
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   connexionButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#1B3075',
     paddingVertical: 16,
     paddingHorizontal: 15,
     borderRadius: 25,
