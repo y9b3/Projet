@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const messages = [
   "Découvrez des services\nprès de chez vous",
@@ -10,6 +11,7 @@ const messages = [
 
 export default function LoginScreen() {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,7 +48,10 @@ export default function LoginScreen() {
               ))}
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.connexionButton}>
+              <TouchableOpacity 
+                style={styles.connexionButton}
+                onPress={() => navigation.navigate('Connexion')}
+              >
                 <Text style={styles.connexionText}>Connexion</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.compteButton}>
