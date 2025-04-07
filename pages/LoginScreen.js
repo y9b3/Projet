@@ -1,61 +1,61 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-const messages = [
-  "Découvrez des services\nprès de chez vous",
-  "Échangez directement\navec les prestataires",
-  "Réservez en toute\nsimplicité"
-];
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function LoginScreen() {
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-    }, 10000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.phoneContainer}>
         <View style={styles.content}>
-          <View style={styles.imageContainer}>
-            <Image 
-              source={require('../assets/phone-hand.png')}
-              style={styles.phoneImage}
-              resizeMode="contain"
-            />
-          </View>
           <View style={styles.bottomSection}>
-            <View style={styles.messageContainer}>
-              <Text style={styles.message}>{messages[currentMessageIndex]}</Text>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Connexion</Text>
             </View>
-            <View style={styles.dotsContainer}>
-              {messages.map((_, index) => (
-                <View
-                  key={index}
-                  style={[
-                    styles.dot,
-                    index === currentMessageIndex && styles.activeDot,
-                  ]}
-                />
-              ))}
+            <View style={styles.formContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor="#666"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Mot de passe"
+                placeholderTextColor="#666"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+              />
+              <TouchableOpacity style={styles.forgotPassword}>
+                <Text style={styles.forgotPasswordText}>
+                  Mot de passe oublié ?
+                </Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity 
-                style={styles.connexionButton}
-                onPress={() => navigation.navigate('Connexion')}
-              >
-                <Text style={styles.connexionText}>Connexion</Text>
+              <TouchableOpacity style={styles.connexionButton}>
+                <Text style={styles.connexionText}>Se connecter</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.compteButton}>
-                <Text style={styles.compteText}>Ouvrir un compte</Text>
+              <TouchableOpacity
+                style={styles.retourButton}
+                onPress={() => navigation.goBack()}
+              >
+                <Text style={styles.retourText}>Retour</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -70,111 +70,98 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1B3075',
+    backgroundColor: "#1B3075",
   },
   phoneContainer: {
     flex: 1,
     borderRadius: 40,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    overflow: 'hidden',
-    backgroundColor: '#fff',
+    overflow: "hidden",
+    backgroundColor: "#fff",
     marginBottom: -30,
   },
   content: {
     flex: 1,
-    justifyContent: 'space-between',
-  },
-  imageContainer: {
-    flex: 2,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    width: '100%',
-    backgroundColor: '#1B3075',
-    paddingBottom: -20,
-  },
-  phoneImage: {
-    width: '100%',
-    height: '90%',
-    marginBottom: -20,
+    justifyContent: "center",
   },
   bottomSection: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 15,
     paddingBottom: 40,
-    paddingTop: 20,
+    paddingTop: 40,
+    justifyContent: "center",
   },
-  messageContainer: {
-    marginTop: 30,
-    alignItems: 'center',
+  titleContainer: {
+    alignItems: "center",
+    marginBottom: 40,
   },
-  message: {
+  title: {
     fontSize: 28,
-    fontWeight: '900',
-    textAlign: 'center',
-    color: '#000',
-    lineHeight: 36,
-    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    fontWeight: "900",
+    color: "#000",
+    textShadowColor: "rgba(0, 0, 0, 0.1)",
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
   },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 25,
+  formContainer: {
+    width: "100%",
+    paddingHorizontal: 15,
+    marginBottom: 30,
   },
-  dot: {
-    width: 5,
-    height: 5,
-    borderRadius: 2.5,
-    backgroundColor: '#E0E0E0',
-    marginHorizontal: 3,
+  input: {
+    backgroundColor: "#f5f5f5",
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    marginBottom: 15,
+    fontSize: 16,
+    color: "#000",
   },
-  activeDot: {
-    backgroundColor: '#1B3075',
-    width: 7,
-    height: 7,
-    borderRadius: 3.5,
+  forgotPassword: {
+    alignItems: "flex-end",
+    marginBottom: 20,
+  },
+  forgotPasswordText: {
+    color: "#1B3075",
+    fontSize: 14,
+    fontWeight: "600",
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: "100%",
     paddingHorizontal: 15,
-    width: '100%',
     gap: 12,
   },
   connexionButton: {
-    backgroundColor: '#1B3075',
+    backgroundColor: "#1B3075",
     paddingVertical: 16,
     paddingHorizontal: 15,
     borderRadius: 25,
-    flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   connexionText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
-  compteButton: {
-    backgroundColor: '#4CAF50',
+  retourButton: {
+    backgroundColor: "#4CAF50",
     paddingVertical: 16,
     paddingHorizontal: 15,
     borderRadius: 25,
-    flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
-  compteText: {
-    color: '#fff',
+  retourText: {
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   bottomBar: {
     height: 30,
-    backgroundColor: '#fff',
-    width: '100%',
-    position: 'absolute',
+    backgroundColor: "#fff",
+    width: "100%",
+    position: "absolute",
     bottom: 0,
   },
-}); 
+});
